@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import List from './components/List'
 
 class App extends Component {
+  state = {
+    input: '',
+    lists: ['absdfasf', 'asdasdasdasd', 'asdasdasdsajoasd'],
+  }
+
+  updateInput(e) {
+    const value = e.target.value
+    this.setState({input: value})
+  }
+
+  handleSubmit() {
+    console.log('you submit', this.state.input)
+    this.setState({input: ''})
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <input value={this.state.input} onChange={this.updateInput.bind(this)} type="text" placeholder="Enter your task..."/>
+        <button onClick={this.handleSubmit.bind(this)} type="submit">Submit</button>
+        {this.state.lists.map(list => {
+          return <List text={list}/>
+        })}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
