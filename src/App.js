@@ -4,7 +4,7 @@ import List from './components/List'
 class App extends Component {
   state = {
     input: '',
-    lists: ['absdfasf', 'asdasdasdasd', 'asdasdasdsajoasd'],
+    lists: [],
   }
 
   updateInput(e) {
@@ -13,8 +13,7 @@ class App extends Component {
   }
 
   handleSubmit() {
-    console.log('you submit', this.state.input)
-    this.setState({input: ''})
+    this.setState({input: '', lists: [...this.state.lists, this.state.input]})
   }
 
   render() {
@@ -22,6 +21,7 @@ class App extends Component {
       <div>
         <input value={this.state.input} onChange={this.updateInput.bind(this)} type="text" placeholder="Enter your task..."/>
         <button onClick={this.handleSubmit.bind(this)} type="submit">Submit</button>
+
         {this.state.lists.map(list => {
           return <List text={list}/>
         })}
