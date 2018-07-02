@@ -22,8 +22,8 @@ class App extends Component {
         <input value={this.state.input} onChange={this.updateInput.bind(this)} type="text" placeholder="Enter your task..."/>
         <button onClick={this.handleSubmit.bind(this)} type="submit">Submit</button>
 
-        {this.state.lists.map(list => {
-          return <List text={list}/>
+        {this.state.lists.map((list, i) => {
+          return <List key={i} text={list}/>
         })}
       </div>
     )
