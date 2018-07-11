@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import List from './components/List'
 
+import styled from 'styled-components'
+
+const Heading = styled.h1`
+  color: ${props => (props.color) ? props.color : 'red'};
+  font-size: 50px;
+  margin: 0;
+`
+
 class App extends Component {
   state = {
     input: '',
@@ -27,6 +35,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Heading>Hello</Heading>
+        <Heading color="green">Chun Rapeepat</Heading>
         <input value={this.state.input} onChange={this.updateInput.bind(this)} type="text" placeholder="Enter your task..."/>
         <button onClick={this.handleSubmit.bind(this)} type="submit">Submit</button>
 
