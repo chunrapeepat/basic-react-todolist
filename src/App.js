@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import List from './components/List'
 
 import styled from 'styled-components'
+import {connect} from 'react-redux'
 
 const Heading = styled.h1`
   color: ${props => (props.color) ? props.color : 'red'};
@@ -22,6 +23,8 @@ class App extends Component {
 
   handleSubmit() {
     this.setState({input: '', lists: [...this.state.lists, this.state.input]})
+    // send action to reducer
+    this.props.dispatch({type: 'INCREMENT_COUNTER_BY_ONE'})
   }
 
   remove(index) {
@@ -30,12 +33,13 @@ class App extends Component {
       return true
     })
     this.setState({lists: newList})
+    // send action to reducer
+    this.props.dispatch({type: 'DECREMENT_COUNTER_BY_ONE'})
   }
 
   render() {
     return (
       <div>
-        <Heading>Hello</Heading>
         <Heading color="green">Chun Rapeepat</Heading>
         <input value={this.state.input} onChange={this.updateInput.bind(this)} type="text" placeholder="Enter your task..."/>
         <button onClick={this.handleSubmit.bind(this)} type="submit">Submit</button>
@@ -48,4 +52,10 @@ class App extends Component {
   }
 }
 
-export default App
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatch,
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App)
